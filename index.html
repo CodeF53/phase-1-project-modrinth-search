@@ -4,18 +4,40 @@
         <link rel="stylesheet" type="text/css" href="./style.css" />
     </head>
     <body>
-        <form id="search-text">
-            <label for="search-query">Search</label>
-            <input id="search-query" type="text" placeholder="Search..."/>
-            <input type="submit" value="search"></button>
-        </form>
-
-        <form id="search-filter">
-        </form>
-
-        <div id="mod-results">
-            
+        <div>
+            <form id="search-text" class="panel">
+                <label for="search-query">Search</label>
+                <input id="search-query" type="text" placeholder="Search..."/>
+                <input type="submit" value="search"></button>
+            </form>
+            <div id="mod-results">
+                <div class="panel mod">
+                    <div>
+                        <img width="96px" height="96px">
+                    </div>
+                    <div>
+                        <h1>mod name</h1>
+                    </div>
+                    <div>
+                        downloads
+                        <br>
+                        followers
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <form id="search-filter" class="panel">
+            <div class="filter-categories">
+                <h3>Categories</h3>
+            </div>
+            <div class="filter-categories">
+                <h3>Loaders</h3>
+            </div>
+            <div class="filter-categories">
+                <h3>Environments</h3>
+            </div>
+        </form>
 
         <script defer src="./index.js"></script>
     </body>

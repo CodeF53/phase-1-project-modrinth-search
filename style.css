@@ -1,4 +1,30 @@
 body {
     background-color: #16181c;
     color: #b0bac5;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+body > div {
+    flex-direction: column;
+}
+#search-filter {
+    display: flex;
+    flex-direction: column;
+}
+
+.panel {
+    background-color: #26292f;
+    border-radius: 1rem;
+    padding: 1em;
+    margin: 1em;
+}
+
+.mod {
+    display: flex;
+    flex-direction: row;
+}
+.mod > div {
+    flex-direction: column;
 }
