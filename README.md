@@ -12,7 +12,8 @@ This site has a really good api so I thought it would be fun to work with
 5. I can as a User, click the next/previous page button to go to the next or previous page.
 ## Stretch goals
 1. I can as a User hover over the mod's creation and modified date to see the exact date and time
-
+2. Don't hardcode the categories, get them from the api
+    - [docs for how to do that](https://docs.modrinth.com/api-spec/#tag/tags)
 
 ## Project Requirements
 1. Your app must be a HTML/CSS/JS frontend that accesses data from a public API. All interactions between the client and the API should be handled asynchronously and use JSON as the communication format. Try to avoid using an API that requires a key. APIs that are free and require no authorization will be easiest to use. For ideas, see this list of no-auth APIs (Links to an external site.). If you would like to use an API that requires a key, please consult with your instructor on how to protect that key. NEVER push your API key to github!
