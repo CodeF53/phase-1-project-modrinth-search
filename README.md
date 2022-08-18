@@ -1,6 +1,9 @@
 # phase-1-project-modrinth-search
 Mock recreation of the modrinth search page made with pure JavaScript
 
+## Pitch
+This site has a really good api so I thought it would be fun to work with
+
 ## Project "User Stories"
 1. I can as a User, click on a mod's name/icon to go to it's page
 2. I can as a User, click on a mod's author to go to it's author's page
