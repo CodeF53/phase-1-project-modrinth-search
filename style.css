@@ -90,7 +90,7 @@ input[type="submit"]:hover {
     background-color: #494f58;
 }
 #page-select button:disabled {
-    border-style:solid;
+    border-style: solid;
     border-width: 1px;
     border-color: #26292f;
     color: #26292f;
@@ -126,12 +126,23 @@ input[type="submit"]:hover {
     padding-left: 0.25em;
     padding-right: 0.25em;
 }
-svg {
+.checkbox_icon svg {
     width: 16px;
     height: 16px;
 }
-
-/* required to make checkbox text clicking work */
 input[type="checkbox"] {
-    pointer-events: none;   
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.25rem;
+
+    background-color: #3e434b;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    /* required to make checkbox text clicking work */
+    pointer-events: none;
+}
+input[type="checkbox"]:checked {
+    background-color: #02ADE2;
 }
