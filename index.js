@@ -138,13 +138,13 @@ function filterHTML(object, parent, facet) {
     div.addEventListener("click", () => {
         checkbox.checked = !checkbox.checked  
 
-        let facet = div.getAttribute("facet")
-        if (checkbox) {
+        let inner_facet = div.getAttribute("facet")
+        if (checkbox.checked) {
             // our box was just enabled, add facet to list of api categories
-            URL_EXTENSION_FILTERS.push(facet)
+            URL_EXTENSION_FILTERS.push(inner_facet)
         } else {
             // our box is being unchecked, remove it's facet
-            let index = URL_EXTENSION_FILTERS.indexOf(facet)
+            let index = URL_EXTENSION_FILTERS.indexOf(inner_facet)
             URL_EXTENSION_FILTERS.splice(index,1)
         }
 
@@ -157,7 +157,6 @@ function filterHTML(object, parent, facet) {
 
 // Fetch categories from modrinth api
 fetch(API_URL + "tag/category").then(response => response.json()).then((data) => {
-    console.log(data)
     // iterate through response
     for (const catKey in data) {
         if (Object.hasOwnProperty.call(data, catKey)) {
@@ -176,7 +175,6 @@ fetch(API_URL + "tag/category").then(response => response.json()).then((data) =>
 const mod_loaders = ["fabric", "forge", "liteloader", "modloader", "quilt", "rift"]
 // Fetch loaders from modrinth api
 fetch(API_URL + "tag/loader").then(response => response.json()).then((data) => {
-    console.log(data)
     // iterate through response
     for (const lodKey in data) {
         if (Object.hasOwnProperty.call(data, lodKey)) {
