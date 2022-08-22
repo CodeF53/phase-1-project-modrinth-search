@@ -34,10 +34,10 @@ function text_element(type, string) {
 }
 // makes a link
 //  <a href="link">text<\a>
-function link_element(link, text) {
+function link_element(link, node) {
     let element = document.createElement("a")
     element.setAttribute("href", link)
-    element.innerHTML = text;
+    element.appendChild(node);
     return element
 }
 // makes an image
@@ -70,23 +70,23 @@ const searchFilterCategories = document.querySelector(".filter-categories#catego
 const searchFilterLoaders = document.querySelector(".filter-categories#loaders")
 const searchFilterEnvironments = document.querySelector(".filter-categories#environments")
 
-
 function modHTML(mod) {
-    let icon = img_element(mod ['icon_url'])
+    let icon = link_element("https://modrinth.com/mod/"+ mod['slug'],img_element(mod ['icon_url']))
     let iconDiv = wrap_in_div('mod_icon_container', [icon])
 
-    let title = text_element('h2', mod['title'])
-    let author = text_element('p', "by: " + mod['author'])
+    let title = link_element("https://modrinth.com/mod/"+ mod['slug'],text_element('h2', mod['title']))
+    let author = link_element("https://modrinth.com/user/"+ mod['author'],text_element('p', "by: " + mod['author']))
     let description = text_element('p', mod['description'])
     //To Do: mod categories, creation, and update date
     let infoDiv = wrap_in_div('',[title, author, description])
 
     let downloads = text_element('h4', mod['downloads'] + " downloads")
     let followers = text_element('h4', mod['follows'] + " followers")
-    let afdsjklDiv = wrap_in_div('', [downloads, followers])
+    let statsDiv = wrap_in_div('mod_stats_div', [downloads, followers])
 
-    return wrap_in_div("panel mod", [iconDiv,infoDiv,afdsjklDiv])
+    return wrap_in_div("panel mod", [iconDiv,infoDiv, statsDiv])
 }
+
 // Fetch data from currently established filters
 // parse data into mods in #mod-results
 function refreshMods() {
