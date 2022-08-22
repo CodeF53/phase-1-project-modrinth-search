@@ -22,6 +22,29 @@ a {
     height: auto;
 }
 
+/* Search Styling */
+#search-query {
+    background-color: #3e434b;
+    border-style: none;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    color: #b0bac5;
+}
+#search-query:focus {
+    border-color: #1bd96a;
+}
+input[type="submit"] {
+    background-color: #3e434b;
+    border-style: none;
+    color: white;
+
+    padding: 0.5rem;
+    border-radius: 1rem;
+}
+input[type="submit"]:hover {
+    background-color: #494f58;
+}
+
 /* mod stuff */
 .mod {
     display: flex;
