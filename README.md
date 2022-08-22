@@ -2,7 +2,33 @@
 Mock recreation of the modrinth search page made with pure JavaScript
 
 ## Pitch
-This site has a really good api so I thought it would be fun to work with
+The basic story of your application
+- The API content of Modrinth is complex and can be filtered and searched for from many different angles. This makes it exciting content to work with, as we can practice a variety of event listeners and practice unique coding that we have not had much exposure to in labs.
+
+The core features of your MVP
+- The core features of our MVP include:
+    - Mod cards
+    - Search query bar
+    - Categories for filtering
+    - Pagination
+    - Interactivity and hyperlinking to mod details through images, authors, titles, etc.
+
+The API data you'll be using and how you'll use it
+- The API data we'll be using includes individual mod cards. These cards are the core data that we will filter, search, and use as the content for our site.
+- Modrinth has an API to query mods through categories and search query. We will be using this to fetch data and parse it into mod cards.
+
+Challenges you expect to face
+- Rachel:
+    - I have not had a lot of experience builting HTML and CSS from scratch. I'm excited to dive into this part of building the website.
+    - I'm looking forward to the challenge of learning more advanced event listeners.
+    - I'm looking forward to doing a partner project to practice collaborating with someone else to build a product.
+
+- Chase: 
+    - Learning how to work with a partner and collaborate over Git. 
+    - Getting SVGs to look right.
+
+How you are meeting the requirements of the project
+- We are creating a frontend HTML/CSS/JS that accesses data from a public API, and these interactions are handled asyncronously. Our app will run on a single page, and we'll but using four, maybe more, unique event listeners. We will be using more than one instance of array intertion.
 
 ## Project "User Stories"
 1. I can as a User, click on a mod's name/icon to go to it's page
