@@ -34,6 +34,30 @@ body > div {
     flex-direction: column;
 }
 
+/* page select stuff */
+#page-select {
+    display: flex;
+    justify-content: center;
+}
+#page-select button {
+    background-color: #26292f;
+    border-style: none;
+    color: white;
+    height: 32px;
+    width: 32px;
+    border-radius: 16px;
+    margin: 0.25em;
+}
+#page-select button:hover {
+    background-color: #494f58;
+}
+#page-select button:disabled {
+    border-style:solid;
+    border-width: 1px;
+    border-color: #26292f;
+    color: #26292f;
+    background-color: #16181c;
+}
 
 /* checkbox picker thing */
 #search-filter {

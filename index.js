@@ -4,6 +4,7 @@ const URL_BASE = API_URL + "search"
 let URL_EXTENSION_BASE = "?limit=20&index=relevance"
 let URL_EXTENSION_QUERY = ""
 let URL_EXTENSION_FILTERS = []
+let page = 0;
 const URL_FULL = () => {
     let out = URL_BASE + URL_EXTENSION_BASE + URL_EXTENSION_QUERY;
     // if we have any facets
@@ -21,7 +22,10 @@ const URL_FULL = () => {
         // add the closing square bracket
         out = out + "]"
     }
-    return out
+    if (page > 0) {
+        out = out + "&offset=" + page * 20 
+    }
+    return out 
 }
 
 // helper methods to make making text/links/images easier
@@ -69,7 +73,8 @@ const searchFilterForm = document.querySelector("form#search-filter")
 const searchFilterCategories = document.querySelector(".filter-categories#categories")
 const searchFilterLoaders = document.querySelector(".filter-categories#loaders")
 const searchFilterEnvironments = document.querySelector(".filter-categories#environments")
-
+const prevPageButton = document.querySelector(`button[aria-label="Previous Page"]`)
+const nextPageButton = document.querySelector(`button[aria-label="Next Page"]`)
 
 function modHTML(mod) {
     let icon = img_element(mod ['icon_url'])
@@ -90,8 +95,17 @@ function modHTML(mod) {
 // Fetch data from currently established filters
 // parse data into mods in #mod-results
 function refreshMods() {
+    // disable page buttons while we are loading
+    prevPageButton.setAttribute("disabled", "")
+    nextPageButton.setAttribute("disabled", "")
+
     modResultsNode.innerHTML = ''
     fetch(URL_FULL()).then(response => response.json()).then((data) => {
+        // enable page buttons if they will point to data
+        if (page > 0) { prevPageButton.removeAttribute("disabled") }
+        if ((page+1)*20 < data["total_hits"]) { nextPageButton.removeAttribute("disabled") }
+
+        // iterate through mods and add to screen
         data["hits"].forEach(mod => {
             modResultsNode.appendChild(modHTML(mod));
         });
@@ -198,3 +212,12 @@ filterHTML({
 filterHTML({
     name: "server", icon: `<svg data-v-cb4b130e="" data-v-7d6eab08="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class=""><line data-v-cb4b130e="" data-v-7d6eab08="" x1="22" y1="12" x2="2" y2="12"></line><path data-v-cb4b130e="" data-v-7d6eab08="" d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path><line data-v-cb4b130e="" data-v-7d6eab08="" x1="6" y1="16" x2="6.01" y2="16"></line><line data-v-cb4b130e="" data-v-7d6eab08="" x1="10" y1="16" x2="10.01" y2="16"></line></svg>`
 }, searchFilterEnvironments, `"server_side:optional","server_side:required"`)
+
+
+// next/prior page buttons
+function changePage(newPage) {
+    page = newPage;
+    refreshMods()
+}
+prevPageButton.addEventListener("click", ()=>{changePage(page-1)})
+nextPageButton.addEventListener("click", ()=>{changePage(page+1)})
