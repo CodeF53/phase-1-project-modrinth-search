@@ -55,9 +55,9 @@ function html_element(input) {
 }
 
 // wraps inputted element array in a div with inputted class
-function wrap_in_div(div_class, elements) {
+function wrap_in_div(div_classes, elements) {
     let div = document.createElement("div")
-    div.classList = [div_class];
+    div.classList = div_classes;
     div.append(...elements)
     return div
 }
@@ -70,11 +70,31 @@ const searchFilterCategories = document.querySelector(".filter-categories#catego
 const searchFilterLoaders = document.querySelector(".filter-categories#loaders")
 const searchFilterEnvironments = document.querySelector(".filter-categories#environments")
 
+
+function modHTML(mod) {
+    let icon = img_element(mod ['icon_url'])
+    let iconDiv = wrap_in_div('mod_icon_container', [icon])
+
+    let title = text_element('h2', mod['title'])
+    let author = text_element('p', "by: " + mod['author'])
+    let description = text_element('p', mod['description'])
+    //To Do: mod categories, creation, and update date
+    let infoDiv = wrap_in_div('',[title, author, description])
+
+    let downloads = text_element('h4', mod['downloads'] + " downloads")
+    let followers = text_element('h4', mod['follows'] + " followers")
+    let afdsjklDiv = wrap_in_div('', [downloads, followers])
+
+    return wrap_in_div("panel mod", [iconDiv,infoDiv,afdsjklDiv])
+}
 // Fetch data from currently established filters
 // parse data into mods in #mod-results
 function refreshMods() {
+    modResultsNode.innerHTML = ''
     fetch(URL_FULL()).then(response => response.json()).then((data) => {
-        console.log(data)
+        data["hits"].forEach(mod => {
+            modResultsNode.appendChild(modHTML(mod));
+        });
     })
 }
 // by default render front page mods

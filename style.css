@@ -12,6 +12,12 @@ body > div {
     flex-direction: column;
 }
 
+.mod_icon_container > img {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 1rem;
+}
+
 .panel {
     background-color: #26292f;
     border-radius: 1rem;
