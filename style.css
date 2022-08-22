@@ -11,10 +11,6 @@ body {
 body > div {
     flex-direction: column;
 }
-#search-filter {
-    display: flex;
-    flex-direction: column;
-}
 
 .panel {
     background-color: #26292f;
@@ -23,10 +19,51 @@ body > div {
     margin: 1em;
 }
 
+/* mod stuff */
 .mod {
     display: flex;
     flex-direction: row;
 }
 .mod > div {
     flex-direction: column;
+}
+
+
+/* checkbox picker thing */
+#search-filter {
+    display: flex;
+    flex-direction: column;
+}
+#search-filter h3 {
+    color: #ecf9fb;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* make the category checkbox look good */
+.checkbox_outer {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0.25em;
+
+    user-select: none;
+}
+.checkbox_outer label {
+    display: flex;
+    flex-direction: row;
+}
+.checkbox_icon {
+    width: fit-content;
+    margin: auto;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+}
+svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* required to make checkbox text clicking work */
+input[type="checkbox"] {
+    pointer-events: none;   
 }

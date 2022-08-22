@@ -28,128 +28,14 @@
         </div>
 
         <form id="search-filter" class="panel">
-            <div class="filter-categories"><h3>Categories</h3>
-                <div>
-                    <input type="checkbox" id="adventure" name="adventure" facet='"categories:adventure"'>
-                    <label for="adventure">adventure</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="cursed" name="cursed" facet='"categories:cursed"'>
-                    <label for="cursed">cursed</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="decoration" name="decoration" facet='"categories:decoration"'>
-                    <label for="decoration">decoration</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="economy" name="economy" facet='"categories:economy"'>
-                    <label for="economy">economy</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="equipment" name="equipment" facet='"categories:equipment"'>
-                    <label for="equipment">equipment</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="food" name="food" facet='"categories:food"'>
-                    <label for="food">food</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="game-mechanics" name="game-mechanics" facet='"categories:game-mechanics"'>
-                    <label for="game-mechanics">game-mechanics</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="library" name="library" facet='"categories:library"'>
-                    <label for="library">library</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="magic" name="magic" facet='"categories:magic"'>
-                    <label for="magic">magic</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="management" name="management" facet='"categories:management"'>
-                    <label for="management">management</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="minigame" name="minigame" facet='"categories:minigame"'>
-                    <label for="minigame">minigame</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="mobs" name="mobs" facet='"categories:mobs"'>
-                    <label for="mobs">mobs</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="social" name="social" facet='"categories:social"'>
-                    <label for="social">social</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="optimization" name="optimization" facet='"categories:optimization"'>
-                    <label for="optimization">optimization</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="storage" name="storage" facet='"categories:storage"'>
-                    <label for="storage">storage</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="technology" name="technology" facet='"categories:technology"'>
-                    <label for="technology">technology</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="transportation" name="transportation" facet='"categories:transportation"'>
-                    <label for="transportation">transportation</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="utility" name="utility" facet='"categories:utility"'>
-                    <label for="utility">utility</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="worldgen" name="worldgen" facet='"categories:worldgen"'>
-                    <label for="worldgen">worldgen</label>
-                </div>
+            <div class="filter-categories" id="categories"><h3>Categories</h3>
             </div>
-            <div class="filter-categories"><h3>Loaders</h3>
-                <div>
-                    <input type="checkbox" id="fabric" name="fabric" facet='"categories:fabric"'>
-                    <label for="fabric">fabric</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="forge" name="forge" facet='"categories:forge"'>
-                    <label for="forge">forge</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="quilt" name="quilt" facet='"categories:quilt"'>
-                    <label for="quilt">quilt</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="liteloader" name="liteloader" facet='"categories:liteloader"'>
-                    <label for="liteloader">liteloader</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="modloader" name="modloader" facet='"categories:modloader"'>
-                    <label for="modloader">modloader</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="rift" name="rift" facet='"categories:rift"'>
-                    <label for="rift">rift</label>
-                </div>
+            <div class="filter-categories" id="loaders"><h3>Loaders</h3>
             </div>
-            <div class="filter-categories">
-                <h3>Environments</h3>
-                
+            <div class="filter-categories" id="environments"><h3>Environments</h3>
             </div>
         </form>
 
         <script defer src="./index.js"></script>
     </body>
 </html> 
-
-<!--
-    regex used to generate categories:
-    \,
-    replace: \n
-
-    \%3A
-    replace: :
-
-    ^(.*\:(.*))$
-    list: <div>\n    <input type="checkbox" id="$2" name="$2" facet='"$1"'>\n    <label for="$2">$2</label>\n</div>\n 
--->
