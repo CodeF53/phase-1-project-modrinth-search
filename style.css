@@ -13,6 +13,11 @@ a {
     color: #ecf9fb;
     text-decoration: none;
 }
+.textlogo {
+    height: 2.75rem;
+    width: auto;
+    padding: 0px;
+}
 .panel {
     background-color: #26292f;
     border-radius: 1rem;
