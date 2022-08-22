@@ -31,7 +31,7 @@ a {
     color: #b0bac5;
 }
 #search-query:focus {
-    border-color: #1bd96a;
+    border-color: #02ADE2;
 }
 input[type="submit"] {
     background-color: #3e434b;
