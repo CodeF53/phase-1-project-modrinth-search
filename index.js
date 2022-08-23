@@ -76,6 +76,31 @@ const searchFilterEnvironments = document.querySelector(".filter-categories#envi
 const prevPageButton = document.querySelector(`button[aria-label="Previous Page"]`)
 const nextPageButton = document.querySelector(`button[aria-label="Next Page"]`)
 
+// STRETCH 
+// a cache of all the category icons, initialized by running cat fetch on filterHTML
+// {catName:"<svg>", catName:"<svg>"}
+let catIcons = {}
+// inputted relevant data {"display_categories":["utility","modloader"]}
+function modCategoryHTML(mod) {
+    iconNodes = []
+    mod["display_categories"].forEach(category => {
+        let icon = catIcons[category]
+        if (icon != undefined) {
+            iconNodes.push(wrap_in_div("mod_cat_icon", [
+                html_element(icon), // makes HTML from the raw string "<svg>...</svg>"
+                text_element("p", category)
+            ]))
+        }
+    });
+    return wrap_in_div("mod_categories", iconNodes)
+}
+
+// STRETCH created/updated elements
+// inputted relevant data {"date_created":"2022-06-28T23:06:28.226904Z","date_modified":"2022-06-28T23:06:27.978542Z"}
+function modDateHTML(mod) {
+    
+}
+
 function modHTML(mod) {
     // if mod has no icon, use modrinth's placeholder image
     let imgSrc = mod['icon_url']
@@ -87,8 +112,9 @@ function modHTML(mod) {
     let title = link_element("https://modrinth.com/mod/"+ mod['slug'],text_element('h2', mod['title']))
     let author = link_element("https://modrinth.com/user/"+ mod['author'],text_element('p', "by: " + mod['author']))
     let description = text_element('p', mod['description'])
-    //To Do: mod categories, creation, and update date
-    let infoDiv = wrap_in_div("mod_info_div_container",[wrap_in_div('mod_info_div',[title, author, description])])
+    let cats = modCategoryHTML(mod)
+    //TODO: creation, and update date
+    let infoDiv = wrap_in_div("mod_info_div_container",[wrap_in_div('mod_info_div',[title, author, description, cats])])
 
     let downloads = text_element('h4', mod['downloads'] + " downloads")
     let followers = text_element('h4', mod['follows'] + " followers")
@@ -116,8 +142,6 @@ function refreshMods() {
         });
     })
 }
-// by default render front page mods
-refreshMods();
 
 // when our Filters change or searchQueryForm is submitted
 //      update URL_EXTENSION to match new filters
@@ -172,6 +196,9 @@ function filterHTML(object, parent, facet) {
     })
 
     parent.appendChild(div)
+
+    // CACHE "name":"<svg>...</svg>" for modCategoryHTML()
+    catIcons[object["name"]] = object["icon"]
 }
 
 // Fetch categories from modrinth api
@@ -187,6 +214,9 @@ fetch(API_URL + "tag/category").then(response => response.json()).then((data) =>
             }
         }
     }
+}).then (() => {
+    // render front page mods once all categories are loaded so we dont miss any
+    refreshMods();
 })
 
 // modrinth API says plugin loaders are mod loaders, so we have to

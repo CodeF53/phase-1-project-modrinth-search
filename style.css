@@ -83,6 +83,28 @@ input[type="submit"]:hover {
 .mod_info_div * {
     margin: 0;
 }
+.mod_info_div > p {
+    margin-bottom: 0.5rem;
+}
+/* Mod Categories */
+.mod_categories {
+    display: flex;
+    flex-grow: 0;
+    justify-content: start;
+    flex-direction: row;
+}
+.mod_cat_icon {
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+    margin: 0;
+}
+.mod_cat_icon svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+}
 
 /* page select stuff */
 #page-select {
