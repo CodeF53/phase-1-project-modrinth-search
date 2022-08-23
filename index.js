@@ -74,6 +74,7 @@ const searchQueryForm = document.querySelector("form#search-text")
 const searchFilterCategories = document.querySelector(".filter-categories#categories")
 const searchFilterLoaders = document.querySelector(".filter-categories#loaders")
 const searchFilterEnvironments = document.querySelector(".filter-categories#environments")
+const clearFiltersButton = document.querySelector(`button[aria-label="Clear Filters"]`)
 const prevPageButton = document.querySelector(`button[aria-label="Previous Page"]`)
 const nextPageButton = document.querySelector(`button[aria-label="Next Page"]`)
 
@@ -207,6 +208,7 @@ function filterHTML(object, parent, facet) {
         if (checkbox.checked) {
             // our box was just enabled, add facet to list of api categories
             URL_EXTENSION_FILTERS.push(inner_facet)
+            clearFiltersButton.removeAttribute("disabled")
         } else {
             // our box is being unchecked, remove it's facet
             let index = URL_EXTENSION_FILTERS.indexOf(inner_facet)
@@ -270,7 +272,6 @@ filterHTML({
     name: "server", icon: `<svg data-v-cb4b130e="" data-v-7d6eab08="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class=""><line data-v-cb4b130e="" data-v-7d6eab08="" x1="22" y1="12" x2="2" y2="12"></line><path data-v-cb4b130e="" data-v-7d6eab08="" d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path><line data-v-cb4b130e="" data-v-7d6eab08="" x1="6" y1="16" x2="6.01" y2="16"></line><line data-v-cb4b130e="" data-v-7d6eab08="" x1="10" y1="16" x2="10.01" y2="16"></line></svg>`
 }, searchFilterEnvironments, `"server_side:optional","server_side:required"`)
 
-
 // next/prior page buttons
 function changePage(newPage) {
     page = newPage;
@@ -278,3 +279,17 @@ function changePage(newPage) {
 }
 prevPageButton.addEventListener("click", ()=>{changePage(page-1)})
 nextPageButton.addEventListener("click", ()=>{changePage(page+1)})
+
+// 
+clearFiltersButton.addEventListener("click", ()=>{
+    // disable all checkboxes
+    document.querySelectorAll(`input[type="checkbox"]`).forEach(checkbox => {
+        checkbox.checked = false;
+    });
+    // remove all filters
+    URL_EXTENSION_FILTERS = []
+    // refresh mods
+    refreshMods()
+    // disable self
+    clearFiltersButton.setAttribute("disabled","")
+})

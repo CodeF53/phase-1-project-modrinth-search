@@ -30,7 +30,7 @@ body {
     padding: 1.25rem;
 }
 
-/* Basically Everything */
+/* General */
 .panel {
     background-color: #26292f;
     border-radius: 1rem;
@@ -40,8 +40,24 @@ body {
     width: auto;
     height: auto;
 }
+button {
+    white-space: nowrap;
+    height: 2rem;   
+    border-radius: 1rem;
+    border: none;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.15em;
+    font-size: 1rem;
+}
+button:disabled {
+    border-style: solid;
+    border-width: 1px;
+    background-color: transparent!important;
+}
 
-/* header */
+/* Header */
 #text-logo {
     height: 2.25rem;
     width: auto;
@@ -75,6 +91,23 @@ input[type="submit"]:hover {
 }
 
 /* Filter Panel */
+#filters button {
+    background-color: #3e434b;
+    display: flex;
+    width: min-content;
+    padding-right: 1rem;
+}
+#filters button:hover {
+    background-color: #494f58;
+}
+#filters button:disabled {
+    border-color: #555d65;
+    color: #555d65;
+}
+#filters button svg {
+    width: 1.25rem;
+    padding: .5rem;
+}
 #filters h3 {
     color: #ecf9fb;
     margin-top: 1.5rem;
@@ -127,23 +160,14 @@ input[type="checkbox"]:checked {
     background-color: #26292f;
     margin: 0 .3em;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 2rem;
     width: 2rem;
-    border-radius: 1rem;
-    border: none;
-    color: white;
 }
 #page-select button:hover {
     background-color: #494f58;
 }
 #page-select button:disabled {
-    border-style: solid;
-    border-width: 1px;
     border-color: #555d65;
     color: #555d65;
-    background-color: transparent;
 }
 
 /* Mod Panel */
