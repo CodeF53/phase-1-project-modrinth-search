@@ -50,6 +50,14 @@ input[type="submit"]:hover {
     background-color: #494f58;
 }
 
+/* siofadeirjns */
+#disdmsi-div {
+    max-width: 60%;
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
 /* mod stuff */
 .mod {
     display: flex;
@@ -58,10 +66,20 @@ input[type="submit"]:hover {
 .mod > div {
     flex-direction: column;
     flex-direction: row;
-    margin: 0px 12px 12px 0px;
+}
+.mod_info_div_container {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+.mod_info_div {
+    display: flex;
+    flex-direction: column;
+}
+.mod_info_div * {
+    margin: 0;
 }
 .mod_stats_div {
-    margin: 0px 12px 12px 0px;
     text-align: right;
     align-self: right;
     justify-content: flex-end;

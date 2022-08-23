@@ -84,7 +84,7 @@ function modHTML(mod) {
     let author = link_element("https://modrinth.com/user/"+ mod['author'],text_element('p', "by: " + mod['author']))
     let description = text_element('p', mod['description'])
     //To Do: mod categories, creation, and update date
-    let infoDiv = wrap_in_div('',[title, author, description])
+    let infoDiv = wrap_in_div("mod_info_div_container",[wrap_in_div('mod_info_div',[title, author, description])])
 
     let downloads = text_element('h4', mod['downloads'] + " downloads")
     let followers = text_element('h4', mod['follows'] + " followers")
