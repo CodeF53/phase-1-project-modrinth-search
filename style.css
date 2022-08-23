@@ -86,23 +86,6 @@ input[type="submit"]:hover {
 .mod_info_div > p {
     margin-bottom: 0.5rem;
 }
-.titleAuthor {
-    display: flex;
-    flex-direction: row;
-}
-.titleAuthor > h2 {
-    margin: 0px;
-    align-content: left;
-    margin-block-start: 0em;
-    margin-block-end: 0em;
-}
-.titleAuthor > a {
-    align-content: bottom;
-    padding-bottom: 0px;
-    margin-bottom: 0px;
-    border-bottom: 0px;
-    margin-left: .5rem;
-}
 .mod_stat {
     display: flex;
     flex-direction: row;
@@ -123,13 +106,24 @@ input[type="submit"]:hover {
     margin: 0px;
     margin-left: .5rem;
 }
-
+/* Mod Title author */
+.mod_info_div > h2 > strong > a {
+    font-size: 1.5em;
+}
+.mod_info_div > h2 > a  {
+    color: #b0bac5;
+    text-decoration: underline;
+}
+.mod_info_div > h2  {
+    font-size: 1rem;
+}
 /* Mod Categories */
 .mod_categories {
     display: flex;
     flex-grow: 0;
     justify-content: start;
     flex-direction: row;
+    margin-bottom: 0.5rem;
 }
 .mod_cat_icon {
     display: flex;

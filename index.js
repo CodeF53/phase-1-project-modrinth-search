@@ -133,13 +133,12 @@ function modHTML(mod) {
     let icon = link_element("https://modrinth.com/mod/"+ mod['slug'],img_element(imgSrc))
     let iconDiv = wrap_in_div('mod_icon_container', [icon])
 
-    let titleAuthor = wrap_in_div('titleAuthor', [
-        link_element("https://modrinth.com/mod/"+ mod['slug'],text_element('h2', mod['title'])), 
-        link_element("https://modrinth.com/user/"+ mod['author'],text_element('p', "by " + mod['author']))])
+    // creative workaround for making 2 separate inline links of different font sizes
+    let titleAuthor = html_element(`<h2><strong><a href="${"https://modrinth.com/mod/"+mod["slug"]}">${mod["title"]}</a></strong> by <a href="${"https://modrinth.com/user/"+mod["author"]}">${mod["author"]}</a></h2>`)
     let description = text_element('p', mod['description'])
     let cats = modCategoryHTML(mod)
     let date = modDateHTML(mod)
-    let infoDiv = wrap_in_div("mod_info_div_container",[wrap_in_div('mod_info_div',[title, author, description, cats, date])])
+    let infoDiv = wrap_in_div("mod_info_div_container",[wrap_in_div('mod_info_div',[titleAuthor, description, cats, date])])
 
     let downloads = wrap_in_div("mod_stat", [
         img_element('assets/DownloadIcon.svg'),
