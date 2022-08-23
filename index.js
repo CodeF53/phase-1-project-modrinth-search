@@ -100,7 +100,25 @@ function modCategoryHTML(mod) {
 // STRETCH created/updated elements
 // inputted relevant data {"date_created":"2022-06-28T23:06:28.226904Z","date_modified":"2022-06-28T23:06:27.978542Z"}
 function modDateHTML(mod) {
-    
+    let now = Date.now() // unix timestamp of NOW
+    let created = Date.parse(mod["date_created"]) // unix timestamp of created in ms
+    let updated = Date.parse(mod["date_modified"]) // unix timestamp of updated in ms
+
+    // how long it has been since mod was created in milliseconds
+    let created_delta = now - created 
+    // how long it has been since mod was last updated in milliseconds
+    let updated_delta = now - updated
+
+    // TODO parse these unix timestamps into "years"/"months"/"days"
+    let created_delta_text = "TEMP"
+    let updated_delta_text = "TEMP"
+
+    return wrap_in_div("mod_dates", [
+        // <div class="mod_date"><svg>CreatedIcon</svg><p>Created created_delta_text ago</p></div>
+        wrap_in_div("mod_date", [img_element("assets/CreatedIcon.svg"), text_element("p", `Created ${created_delta_text} ago`)]),
+        // <div class="mod_date"><svg>UpdatedIcon</svg><p>Updated updated_delta_text ago</p></div>
+        wrap_in_div("mod_date", [img_element("assets/UpdatedIcon.svg"), text_element("p", `Updated ${updated_delta_text} ago`)])
+    ])
 }
 
 function modHTML(mod) {
@@ -116,8 +134,8 @@ function modHTML(mod) {
         link_element("https://modrinth.com/user/"+ mod['author'],text_element('p', "by " + mod['author']))])
     let description = text_element('p', mod['description'])
     let cats = modCategoryHTML(mod)
-    //TODO: creation, and update date
-    let infoDiv = wrap_in_div("mod_info_div_container",[wrap_in_div('mod_info_div',[titleAuthor, description, cats])])
+    let date = modDateHTML(mod)
+    let infoDiv = wrap_in_div("mod_info_div_container",[wrap_in_div('mod_info_div',[title, author, description, cats, date])])
 
     let downloads = wrap_in_div("mod_stat", [
         img_element('assets/DownloadIcon.svg'),

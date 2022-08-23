@@ -137,6 +137,21 @@ input[type="submit"]:hover {
     padding-left: 0.25em;
     padding-right: 0.25em;
 }
+/* Mod Date data*/
+.mod_dates {
+    display: flex;
+    flex-direction: row;
+}
+.mod_date {
+    display: flex;
+    flex-direction: row;
+}
+.mod_date > img {
+    width: 1.25rem;
+    height: 1.25rem;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+}
 
 /* page select stuff */
 #page-select {
