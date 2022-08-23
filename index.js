@@ -77,7 +77,11 @@ const prevPageButton = document.querySelector(`button[aria-label="Previous Page"
 const nextPageButton = document.querySelector(`button[aria-label="Next Page"]`)
 
 function modHTML(mod) {
-    let icon = link_element("https://modrinth.com/mod/"+ mod['slug'],img_element(mod ['icon_url']))
+    // if mod has no icon, use modrinth's placeholder image
+    let imgSrc = mod['icon_url']
+    if (imgSrc == "") { imgSrc = "https://cdn.modrinth.com/placeholder.svg?inline" }
+
+    let icon = link_element("https://modrinth.com/mod/"+ mod['slug'],img_element(imgSrc))
     let iconDiv = wrap_in_div('mod_icon_container', [icon])
 
     let title = link_element("https://modrinth.com/mod/"+ mod['slug'],text_element('h2', mod['title']))
