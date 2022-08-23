@@ -58,6 +58,8 @@ function html_element(input) {
     return new DOMParser().parseFromString(input, 'text/html').body.childNodes[0]
 }
 
+// let  html_element(mod,<span style = h2> title </span> <span style = p> author </span>)
+
 // wraps inputted element array in a div with inputted class
 function wrap_in_div(div_classes, elements) {
     let div = document.createElement("div")
@@ -110,14 +112,20 @@ function modHTML(mod) {
     let iconDiv = wrap_in_div('mod_icon_container', [icon])
 
     let title = link_element("https://modrinth.com/mod/"+ mod['slug'],text_element('h2', mod['title']))
-    let author = link_element("https://modrinth.com/user/"+ mod['author'],text_element('p', "by: " + mod['author']))
+    let author = link_element("https://modrinth.com/user/"+ mod['author'],text_element('p', "by " + mod['author']))
     let description = text_element('p', mod['description'])
     let cats = modCategoryHTML(mod)
     //TODO: creation, and update date
     let infoDiv = wrap_in_div("mod_info_div_container",[wrap_in_div('mod_info_div',[title, author, description, cats])])
 
-    let downloads = text_element('h4', mod['downloads'] + " downloads")
-    let followers = text_element('h4', mod['follows'] + " followers")
+    let downloads = wrap_in_div("mod_stat", [
+        img_element('assets/DownloadIcon.svg'),
+        text_element('h4', mod['downloads'] + " downloads")])
+
+    let followers = wrap_in_div("mod_stat", [
+        img_element('assets/HeartIcon.svg'),
+        text_element('h4', mod['follows'] + " followers")])
+
     let statsDiv = wrap_in_div('mod_stats_div', [downloads, followers])
 
     return wrap_in_div("panel mod", [iconDiv,infoDiv, statsDiv])
