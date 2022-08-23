@@ -111,12 +111,13 @@ function modHTML(mod) {
     let icon = link_element("https://modrinth.com/mod/"+ mod['slug'],img_element(imgSrc))
     let iconDiv = wrap_in_div('mod_icon_container', [icon])
 
-    let title = link_element("https://modrinth.com/mod/"+ mod['slug'],text_element('h2', mod['title']))
-    let author = link_element("https://modrinth.com/user/"+ mod['author'],text_element('p', "by " + mod['author']))
+    let titleAuthor = wrap_in_div('titleAuthor', [
+        link_element("https://modrinth.com/mod/"+ mod['slug'],text_element('h2', mod['title'])), 
+        link_element("https://modrinth.com/user/"+ mod['author'],text_element('p', "by " + mod['author']))])
     let description = text_element('p', mod['description'])
     let cats = modCategoryHTML(mod)
     //TODO: creation, and update date
-    let infoDiv = wrap_in_div("mod_info_div_container",[wrap_in_div('mod_info_div',[title, author, description, cats])])
+    let infoDiv = wrap_in_div("mod_info_div_container",[wrap_in_div('mod_info_div',[titleAuthor, description, cats])])
 
     let downloads = wrap_in_div("mod_stat", [
         img_element('assets/DownloadIcon.svg'),
