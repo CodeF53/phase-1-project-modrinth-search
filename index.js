@@ -33,7 +33,7 @@ const URL_FULL = () => {
 //  <type>string<\type>
 function text_element(type, string) {
     let element = document.createElement(type);
-    element.appendChild(document.createTextNode(string));
+    element.innerHTML = string;
     return element;
 }
 // makes a link
@@ -121,6 +121,10 @@ function modDateHTML(mod) {
     ])
 }
 
+function kFormatter(num) {
+    return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'k' : Math.sign(num)*Math.abs(num)
+}
+
 function modHTML(mod) {
     // if mod has no icon, use modrinth's placeholder image
     let imgSrc = mod['icon_url']
@@ -139,11 +143,11 @@ function modHTML(mod) {
 
     let downloads = wrap_in_div("mod_stat", [
         img_element('assets/DownloadIcon.svg'),
-        text_element('h4', mod['downloads'] + " downloads")])
+        text_element('p', "<strong>" + kFormatter(mod['downloads']) + "</strong> downloads")])
 
     let followers = wrap_in_div("mod_stat", [
         img_element('assets/HeartIcon.svg'),
-        text_element('h4', mod['follows'] + " followers")])
+        text_element('p', "<strong>" + kFormatter(mod['follows']) + "</strong> followers")])
 
     let statsDiv = wrap_in_div('mod_stats_div', [downloads, followers])
 

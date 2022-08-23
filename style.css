@@ -111,9 +111,15 @@ input[type="submit"]:hover {
 .mod_stat > img {
     width: 20px;
     height: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
 }
-.mod_stat > h4 {
+.mod_stat > p > strong {
     font-size: 1.25rem;
+    margin: 0px;
+}
+.mod_stat > p  {
+    font-size: 0.875rem;
     margin: 0px;
     margin-left: .5rem;
 }
