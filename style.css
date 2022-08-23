@@ -145,6 +145,7 @@ input[type="submit"]:hover {
 .mod_date {
     display: flex;
     flex-direction: row;
+    margin-right: 1.5rem;
 }
 .mod_date > img {
     width: 1.25rem;
