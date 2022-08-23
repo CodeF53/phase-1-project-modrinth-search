@@ -6,9 +6,6 @@ body {
     justify-content: center;
     font-family: 'Segoe UI', sans-serif;
 }
-body > div {
-    flex-direction: column;
-}
 a {
     color: #ecf9fb;
     text-decoration: none;
@@ -26,8 +23,19 @@ a {
     width: auto;
     height: auto;
 }
+#center-div {
+    width: 80%;
+}
+
 
 /* Search Styling */
+#search-container {
+    display: flex;
+    flex-direction: row;
+}
+#search-text {
+    margin: 0;
+}
 #search-query {
     background-color: #3e434b;
     border-style: none;
@@ -50,41 +58,20 @@ input[type="submit"]:hover {
     background-color: #494f58;
 }
 
-/* siofadeirjns */
-#disdmsi-div {
-    max-width: 60%;
-    display: flex;
-    justify-content: space-between;
-    flex-grow: 1;
-}
-
 /* mod stuff */
 .mod {
     display: flex;
     flex-direction: row;
 }
-.mod > div {
+.mod_icon_container, .mod_info_div, .mod_stats_div {
+    display: flex;
     flex-direction: column;
-    flex-direction: row;
 }
 .mod_info_div_container {
     display: flex;
     justify-content: space-between;
     flex-grow: 1;
-}
-.mod_info_div {
-    display: flex;
     flex-direction: column;
-}
-.mod_info_div * {
-    margin: 0;
-}
-.mod_stats_div {
-    text-align: right;
-    align-self: right;
-    justify-content: flex-end;
-    width: auto;
-    height: auto;
 }
 .mod_icon_container > a > img {
     width: 6rem;
@@ -93,7 +80,9 @@ input[type="submit"]:hover {
     margin: 0px 12px 12px 0px;
     align-content: left;
 }
-
+.mod_info_div * {
+    margin: 0;
+}
 /* page select stuff */
 #page-select {
     display: flex;
@@ -123,6 +112,7 @@ input[type="submit"]:hover {
 #search-filter {
     display: flex;
     flex-direction: column;
+    height: fit-content;
 }
 #search-filter h3 {
     color: #ecf9fb;
@@ -135,7 +125,7 @@ input[type="submit"]:hover {
     display: flex;
     flex-direction: row;
     margin-bottom: 0.25em;
-
+    
     user-select: none;
 }
 .checkbox_outer label {
