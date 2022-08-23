@@ -100,24 +100,15 @@ function modCategoryHTML(mod) {
 // STRETCH created/updated elements
 // inputted relevant data {"date_created":"2022-06-28T23:06:28.226904Z","date_modified":"2022-06-28T23:06:27.978542Z"}
 function modDateHTML(mod) {
-    let now = Date.now() // unix timestamp of NOW
-    let created = Date.parse(mod["date_created"]) // unix timestamp of created in ms
-    let updated = Date.parse(mod["date_modified"]) // unix timestamp of updated in ms
-
-    // how long it has been since mod was created in milliseconds
-    let created_delta = now - created 
-    // how long it has been since mod was last updated in milliseconds
-    let updated_delta = now - updated
-
-    // TODO parse these unix timestamps into "years"/"months"/"days"
-    let created_delta_text = "TEMP"
-    let updated_delta_text = "TEMP"
+    // https://day.js.org/docs/en/display/from-now
+    let created_from_now = dayjs(mod["date_created"]).fromNow()
+    let updated_from_now = dayjs(mod["date_modified"]).fromNow()
 
     return wrap_in_div("mod_dates", [
-        // <div class="mod_date"><svg>CreatedIcon</svg><p>Created created_delta_text ago</p></div>
-        wrap_in_div("mod_date", [img_element("assets/CreatedIcon.svg"), text_element("p", `Created ${created_delta_text} ago`)]),
-        // <div class="mod_date"><svg>UpdatedIcon</svg><p>Updated updated_delta_text ago</p></div>
-        wrap_in_div("mod_date", [img_element("assets/UpdatedIcon.svg"), text_element("p", `Updated ${updated_delta_text} ago`)])
+        // <div class="mod_date"><svg>CreatedIcon</svg><p>Created created_delta_text</p></div>
+        wrap_in_div("mod_date", [img_element("assets/CreatedIcon.svg"), text_element("p", `Created ${created_from_now}`)]),
+        // <div class="mod_date"><svg>UpdatedIcon</svg><p>Updated updated_delta_text</p></div>
+        wrap_in_div("mod_date", [img_element("assets/UpdatedIcon.svg"), text_element("p", `Updated ${updated_from_now}`)])
     ])
 }
 
@@ -168,7 +159,9 @@ function refreshMods() {
 
         // iterate through mods and add to screen
         data["hits"].forEach(mod => {
-            modResultsNode.appendChild(modHTML(mod));
+            if (mod["project_type"] == "mod") {
+                modResultsNode.appendChild(modHTML(mod));
+            }
         });
     })
 }

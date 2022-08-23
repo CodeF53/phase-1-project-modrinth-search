@@ -3,6 +3,12 @@
         <title>Flatironth</title>
         <link rel="stylesheet" type="text/css" href="./style.css" />
         <link rel="icon" type="image/x-icon" href="assets/favicon.svg">
+        
+        <!-- date/time lib for parsing Created _fromNow_ -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.5/dayjs.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.5/plugin/relativeTime.min.js"></script>
+        <script>dayjs.extend(window.dayjs_plugin_relativeTime)</script>
+
         <!-- Fancy Embeds for rich text chats, ie: discord/slack/text messages -->
         <meta property="og:type" content="website">
         <meta property="og:title" content="Flatironth">
