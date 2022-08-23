@@ -1,38 +1,54 @@
 body {
     background-color: #16181c;
     color: #b0bac5;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
     font-family: 'Segoe UI', sans-serif;
 }
-a {
-    color: #ecf9fb;
-    text-decoration: none;
+
+/* Layout */
+#header {
+    display: flex;
+    margin: 0.75rem auto;
+    max-width: 80rem;
 }
-.textlogo {
-    height: 2.75rem;
-    width: auto;
-    padding: 0px;
+#page {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    max-width: 80rem;
 }
+#content {
+    width: 60rem;
+}
+#sidebar {
+    width: 20rem;
+    margin-left: 0.75rem;
+    flex-shrink: 1;
+}
+#filters {
+    display: flex;
+    flex-direction: column;;
+    padding: 1.25rem;
+}
+
+/* Basically Everything */
 .panel {
     background-color: #26292f;
     border-radius: 1rem;
     padding: 1em;
-    margin: 1em;
+    margin: .75rem 0;
+    margin-top: 0;
     width: auto;
     height: auto;
 }
-#center-div {
-    width: 80%;
+
+/* header */
+#text-logo {
+    height: 2.25rem;
+    width: auto;
+    padding: 0 1.5rem;
 }
 
-
-/* Search Styling */
-#search-container {
-    display: flex;
-    flex-direction: row;
-}
+/* Search Panel */
 #search-text {
     margin: 0;
 }
@@ -58,7 +74,79 @@ input[type="submit"]:hover {
     background-color: #494f58;
 }
 
-/* mod stuff */
+/* Filter Panel */
+#filters h3 {
+    color: #ecf9fb;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+.checkbox_outer {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: .25rem;
+    
+    user-select: none;
+}
+.checkbox_outer label {
+    display: flex;
+    flex-direction: row;
+}
+.checkbox_icon {
+    width: fit-content;
+    margin: auto;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+}
+.checkbox_icon svg {
+    width: 16px;
+    height: 16px;
+}
+input[type="checkbox"] {
+    /* only way to not have ugly borders on it */
+    appearance: none;
+    /* recreation with background */
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.25rem;
+    background-color: #3e434b;
+    /* required to make checkbox text clicking work */
+    pointer-events: none;
+}
+input[type="checkbox"]:checked {
+    background-color: #02ADE2;
+}
+
+/* Page Selector area */
+#page-select {
+    display: flex;
+    justify-content: center;
+    height: 2em;
+    margin: .5rem 0;
+}
+#page-select button {
+    background-color: #26292f;
+    margin: 0 .3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 1rem;
+    border: none;
+    color: white;
+}
+#page-select button:hover {
+    background-color: #494f58;
+}
+#page-select button:disabled {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #555d65;
+    color: #555d65;
+    background-color: transparent;
+}
+
+/* Mod Panel */
 .mod {
     display: flex;
     flex-direction: row;
@@ -67,12 +155,7 @@ input[type="submit"]:hover {
     display: flex;
     flex-direction: column;
 }
-.mod_info_div_container {
-    display: flex;
-    justify-content: space-between;
-    flex-grow: 1;
-    flex-direction: column;
-}
+/* Mod Icon */
 .mod_icon_container > a > img {
     width: 6rem;
     height: 6rem;
@@ -80,42 +163,30 @@ input[type="submit"]:hover {
     margin: 0px 12px 12px 0px;
     align-content: left;
 }
+/* Mod Info */
+.mod_info_div_container {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+}
+.mod_info_div > h2  {
+    font-size: 1rem;
+}
 .mod_info_div * {
     margin: 0;
 }
 .mod_info_div > p {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
 }
-.mod_stat {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 1rem;
-}
-.mod_stat > img {
-    width: 20px;
-    height: 20px;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-.mod_stat > p > strong {
-    font-size: 1.25rem;
-    margin: 0px;
-}
-.mod_stat > p  {
-    font-size: 0.875rem;
-    margin: 0px;
-    margin-left: .5rem;
-}
-/* Mod Title author */
+/* Mod Title/Author */
 .mod_info_div > h2 > strong > a {
+    color: #ecf9fb;
+    text-decoration: none;
     font-size: 1.5em;
 }
 .mod_info_div > h2 > a  {
     color: #b0bac5;
     text-decoration: underline;
-}
-.mod_info_div > h2  {
-    font-size: 1rem;
 }
 /* Mod Categories */
 .mod_categories {
@@ -137,12 +208,13 @@ input[type="submit"]:hover {
     padding-left: 0.25em;
     padding-right: 0.25em;
 }
-/* Mod Date data*/
+/* Mod Date Data*/
 .mod_dates {
     display: flex;
     flex-direction: row;
 }
 .mod_date {
+    white-space: nowrap;
     display: flex;
     flex-direction: row;
     margin-right: 1.5rem;
@@ -153,79 +225,28 @@ input[type="submit"]:hover {
     padding-left: 0.25em;
     padding-right: 0.25em;
 }
-
-/* page select stuff */
-#page-select {
-    display: flex;
-    justify-content: center;
+/* Mod Stats Data */
+.mod_stats_div {
+    min-width: 12rem;
 }
-#page-select button {
-    background-color: #26292f;
-    border-style: none;
-    color: white;
-    height: 32px;
-    width: 32px;
-    border-radius: 16px;
-    margin: 0.25em;
-}
-#page-select button:hover {
-    background-color: #494f58;
-}
-#page-select button:disabled {
-    border-style: solid;
-    border-width: 1px;
-    border-color: #26292f;
-    color: #26292f;
-    background-color: #16181c;
-}
-
-/* checkbox picker thing */
-#search-filter {
-    display: flex;
-    flex-direction: column;
-    height: fit-content;
-}
-#search-filter h3 {
-    color: #ecf9fb;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-/* make the category checkbox look good */
-.checkbox_outer {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 0.25em;
-    
-    user-select: none;
-}
-.checkbox_outer label {
+.mod_stat {
+    white-space: nowrap;
     display: flex;
     flex-direction: row;
 }
-.checkbox_icon {
-    width: fit-content;
-    margin: auto;
-    padding-left: 0.25em;
-    padding-right: 0.25em;
+.mod_stat > img {
+    width: 20px;
+    height: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
 }
-.checkbox_icon svg {
-    width: 16px;
-    height: 16px;
+.mod_stat > p > strong {
+    font-size: 1.25rem;
+    margin: 0px;
 }
-input[type="checkbox"] {
-    width: 1rem;
-    height: 1rem;
-    border-radius: 0.25rem;
-
-    background-color: #3e434b;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-
-    /* required to make checkbox text clicking work */
-    pointer-events: none;
-}
-input[type="checkbox"]:checked {
-    background-color: #02ADE2;
+.mod_stat > p  {
+    font-size: 0.875rem;
+    margin: 0px;
+    margin-left: .5rem;
 }

@@ -71,7 +71,6 @@ function wrap_in_div(div_classes, elements) {
 // constant references to parts of our html
 const modResultsNode = document.querySelector("#mod-results")
 const searchQueryForm = document.querySelector("form#search-text")
-const searchFilterForm = document.querySelector("form#search-filter")
 const searchFilterCategories = document.querySelector(".filter-categories#categories")
 const searchFilterLoaders = document.querySelector(".filter-categories#loaders")
 const searchFilterEnvironments = document.querySelector(".filter-categories#environments")
