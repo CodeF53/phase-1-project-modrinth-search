@@ -27,7 +27,8 @@ body {
 #filters {
     display: flex;
     flex-direction: column;;
-    padding: 1.25rem;
+    padding: 1.5rem;
+    height: fit-content;
 }
 
 /* General */
@@ -65,26 +66,43 @@ button:disabled {
 }
 
 /* Search Panel */
-#search-text {
+#search-controls {
+    padding: 0.75rem 1.5rem;
+}
+#searchBar {
     margin: 0;
+    align-items: center;
+    display: inline-flex;
+    position: relative;
 }
-#search-query {
-    background-color: #3e434b;
-    border-style: none;
-    padding: 0.5rem;
-    border-radius: 1rem;
-    color: #b0bac5;
-}
-#search-query:focus {
-    border-color: #02ADE2;
-}
-input[type="submit"] {
-    background-color: #3e434b;
-    border-style: none;
-    color: white;
+#searchBar input {
+    min-width: 15rem;
+    width: 100%;
+    -webkit-appearance: textfield;
+    outline-offset: -2px;
+    overflow: visible;
+    font-size: 100%;
+    line-height: 1.15;
+    font-size: 16px;
+    margin: 2px;
+    padding: 0.5rem 1rem;
+    padding-left: 2rem;
+    border-radius: 2rem;
+    box-sizing: border-box;
 
-    padding: 0.5rem;
-    border-radius: 1rem;
+    background-color: #3e434b;
+    color: #b0bac5;
+    border: 2px solid transparent;
+}
+#searchBar svg {
+    position: absolute;
+    left: .6rem;
+    height: 1rem;
+    z-index: 1;
+    color: var(--color-text);
+    margin-right: -2rem;
+    height: 16px;
+    width: 24px;
 }
 input[type="submit"]:hover {
     background-color: #494f58;
@@ -123,6 +141,7 @@ input[type="submit"]:hover {
 .checkbox_outer label {
     display: flex;
     flex-direction: row;
+    white-space: nowrap;
 }
 .checkbox_icon {
     width: fit-content;
@@ -147,6 +166,16 @@ input[type="checkbox"] {
 }
 input[type="checkbox"]:checked {
     background-color: #02ADE2;
+}
+/* 3 state checkbox stuff */
+[threestate="off"] input[type="checkbox"] {
+    background-color: #3e434b;
+}
+[threestate="required"] input[type="checkbox"] {
+    background-color: #1bd96a;
+}
+[threestate="disabled"] input[type="checkbox"] {
+    background-color: red;
 }
 
 /* Page Selector area */

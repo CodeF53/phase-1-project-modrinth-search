@@ -70,7 +70,7 @@ function wrap_in_div(div_classes, elements) {
 
 // constant references to parts of our html
 const modResultsNode = document.querySelector("#mod-results")
-const searchQueryForm = document.querySelector("form#search-text")
+const searchQueryForm = document.querySelector("form#searchBar")
 const searchFilterCategories = document.querySelector(".filter-categories#categories")
 const searchFilterLoaders = document.querySelector(".filter-categories#loaders")
 const searchFilterEnvironments = document.querySelector(".filter-categories#environments")
@@ -169,14 +169,14 @@ function refreshMods() {
 // when our Filters change or searchQueryForm is submitted
 //      update URL_EXTENSION to match new filters
 //      run refreshMods() to update shown mods
-searchQueryForm.addEventListener("submit", (event) => {
+searchQueryForm.addEventListener("input", (event) => {
     event.preventDefault();
     URL_EXTENSION_QUERY = "&query=" + document.querySelector("#search-query").value
     refreshMods()
 })
 
 
-function filterHTML(object, parent, facet) {
+function filterHTML(object, facet) {
     let checkbox = document.createElement("input")
     checkbox.setAttribute("type", "checkbox")
     checkbox.setAttribute("name", object["name"])
@@ -198,13 +198,19 @@ function filterHTML(object, parent, facet) {
     } else {
         div.setAttribute("facet", `"categories:${object["name"]}"`)
     }
-    
 
+    // CACHE "name":"<svg>...</svg>" for modCategoryHTML()
+    catIcons[object["name"]] = object["icon"]
+
+    return div
+}
+function filterOnClick(containingDiv, parent) {
+    let checkbox = containingDiv.childNodes[0]
     // make clicking anywhere on filter thing work instead of just checkbox
-    div.addEventListener("click", () => {
+    containingDiv.addEventListener("click", () => {
         checkbox.checked = !checkbox.checked  
 
-        let inner_facet = div.getAttribute("facet")
+        let inner_facet = containingDiv.getAttribute("facet")
         if (checkbox.checked) {
             // our box was just enabled, add facet to list of api categories
             URL_EXTENSION_FILTERS.push(inner_facet)
@@ -219,11 +225,9 @@ function filterHTML(object, parent, facet) {
         refreshMods()
     })
 
-    parent.appendChild(div)
-
-    // CACHE "name":"<svg>...</svg>" for modCategoryHTML()
-    catIcons[object["name"]] = object["icon"]
+    parent.appendChild(containingDiv)
 }
+
 
 // Fetch categories from modrinth api
 fetch(API_URL + "tag/category").then(response => response.json()).then((data) => {
@@ -234,7 +238,7 @@ fetch(API_URL + "tag/category").then(response => response.json()).then((data) =>
             // modrinth distributes more than just mods
             // we need to filter out categories only for mods
             if (category["project_type"] == "mod") {
-                filterHTML(category, searchFilterCategories)
+                filterOnClick(filterHTML(category), searchFilterCategories)
             }
         }
     }
@@ -256,21 +260,48 @@ fetch(API_URL + "tag/loader").then(response => response.json()).then((data) => {
             // we need to filter out categories only for mods
             if (loader["supported_project_types"][0] == "mod") {
                 if (mod_loaders.indexOf(loader["name"]) != -1){
-                    filterHTML(loader, searchFilterLoaders)
+                    filterOnClick(filterHTML(loader),searchFilterLoaders)
                 }
             }
         }
     }
 })
 
+function threeStateFilter(button, requiredFacet, disabledFacet, parent) {
+    button.setAttribute("threestate", "off")
+
+    button.addEventListener("click", ()=>{
+        switch (button.getAttribute("threestate")) {
+            case "off":
+                button.setAttribute("threestate", "required")
+                URL_EXTENSION_FILTERS.push(requiredFacet)
+                break
+            case "required":
+                button.setAttribute("threestate", "disabled")
+                URL_EXTENSION_FILTERS.push(disabledFacet)
+                URL_EXTENSION_FILTERS.splice(URL_EXTENSION_FILTERS.indexOf(requiredFacet),1)
+                break
+            case "disabled":
+                button.setAttribute("threestate", "off")
+                URL_EXTENSION_FILTERS.splice(URL_EXTENSION_FILTERS.indexOf(disabledFacet),1)
+                break
+        }
+        refreshMods()
+    })
+    parent.appendChild(button)
+}
+
 // modrinth hardcodes client/server buttons and has no API thing for them
 // so we have to hardcode them as well
-filterHTML({
+const clientButton = filterHTML({
     name: "client", icon: `<svg data-v-cb4b130e="" data-v-7d6eab08="" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true" class=""><rect data-v-cb4b130e="" data-v-7d6eab08="" x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><path data-v-cb4b130e="" data-v-7d6eab08="" d="M8 21h8M12 17v4"></path></svg>`
-}, searchFilterEnvironments, `"client_side:optional","client_side:required"`)
-filterHTML({
+})
+threeStateFilter(clientButton, `"client_side:required","client_side:optional"`, `"client_side:unsupported"`, searchFilterEnvironments)
+
+const serverButton = filterHTML({
     name: "server", icon: `<svg data-v-cb4b130e="" data-v-7d6eab08="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class=""><line data-v-cb4b130e="" data-v-7d6eab08="" x1="22" y1="12" x2="2" y2="12"></line><path data-v-cb4b130e="" data-v-7d6eab08="" d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path><line data-v-cb4b130e="" data-v-7d6eab08="" x1="6" y1="16" x2="6.01" y2="16"></line><line data-v-cb4b130e="" data-v-7d6eab08="" x1="10" y1="16" x2="10.01" y2="16"></line></svg>`
-}, searchFilterEnvironments, `"server_side:optional","server_side:required"`)
+})
+threeStateFilter(serverButton, `"server_side:required","server_side:optional"`, `"server_side:unsupported"`, searchFilterEnvironments)
 
 // next/prior page buttons
 function changePage(newPage) {
@@ -293,3 +324,17 @@ clearFiltersButton.addEventListener("click", ()=>{
     // disable self
     clearFiltersButton.setAttribute("disabled","")
 })
+
+const convertRemToPixels = rem => { return rem * parseFloat(getComputedStyle(document.documentElement).fontSize) };
+
+// Responsive design
+function onResize(event){
+    if (window.innerWidth < convertRemToPixels(64)) {
+        document.querySelector("#sidebar").style.display = "none";
+    } else {
+        document.querySelector("#sidebar").style.display = "flex";
+    }
+}
+// Set correct style when user first opens page
+onResize()
+addEventListener('resize', onResize())
