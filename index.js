@@ -296,12 +296,12 @@ function threeStateFilter(button, requiredFacet, disabledFacet, parent) {
 const clientButton = filterHTML({
     name: "client", icon: `<svg data-v-cb4b130e="" data-v-7d6eab08="" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true" class=""><rect data-v-cb4b130e="" data-v-7d6eab08="" x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><path data-v-cb4b130e="" data-v-7d6eab08="" d="M8 21h8M12 17v4"></path></svg>`
 })
-threeStateFilter(clientButton, `"client_side:required","client_side:optional"`, `"client_side:unsupported"`, searchFilterEnvironments)
+threeStateFilter(clientButton, `"client_side:required"`, `"client_side:unsupported"`, searchFilterEnvironments)
 
 const serverButton = filterHTML({
     name: "server", icon: `<svg data-v-cb4b130e="" data-v-7d6eab08="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class=""><line data-v-cb4b130e="" data-v-7d6eab08="" x1="22" y1="12" x2="2" y2="12"></line><path data-v-cb4b130e="" data-v-7d6eab08="" d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path><line data-v-cb4b130e="" data-v-7d6eab08="" x1="6" y1="16" x2="6.01" y2="16"></line><line data-v-cb4b130e="" data-v-7d6eab08="" x1="10" y1="16" x2="10.01" y2="16"></line></svg>`
 })
-threeStateFilter(serverButton, `"server_side:required","server_side:optional"`, `"server_side:unsupported"`, searchFilterEnvironments)
+threeStateFilter(serverButton, `"server_side:required"`, `"server_side:unsupported"`, searchFilterEnvironments)
 
 // next/prior page buttons
 function changePage(newPage) {
